@@ -17,7 +17,7 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
     {        
         $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-        return $this->redirect($adminUrlGenerator->setController(LangCrudController::class)->generateUrl());
+        return $this->redirect($adminUrlGenerator->setController(TextBlockCrudController::class)->generateUrl());
     }
 
     public function configureDashboard(): Dashboard
@@ -28,8 +28,7 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Languages', 'fas fa-list', Lang::class);
-        yield MenuItem::linkToCrud('Blocks', 'fas fa-list', TextBlock::class);
+        yield MenuItem::linkToCrud('Languages', 'fas fa-language', Lang::class);
+        yield MenuItem::linkToCrud('Blocks', 'fa-regular fa-file-lines', TextBlock::class);
     }
 }
