@@ -2,10 +2,25 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\TextBlockRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+#[ApiResource(
+    operations: [
+        new Get(),
+        new GetCollection()
+    ],
+    order: ['id' => 'ASC'],
+    paginationEnabled: false
+)
+]
+#[ApiFilter(SearchFilter::class, properties: ['id' => 'exact', 'slug' => 'exact', 'lang.slug' => 'exact'])]
 #[ORM\Entity(repositoryClass: TextBlockRepository::class)]
 class TextBlock {
 

@@ -21,7 +21,11 @@ class TextBlockCrudController extends AbstractCrudController
         return [
             TextField::new('slug'),
             TextField::new('title'),
-            TextEditorField::new('content'),
+            TextEditorField::new('content')->setTrixEditorConfig([
+                'text_attributes' => [
+                    'href' => ['tagName' => 'p', 'target' => '_blank'],
+                ]
+            ]),
             AssociationField::new('lang'),
         ];
     }
