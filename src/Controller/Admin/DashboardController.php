@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Experience;
 use App\Entity\Lang;
 use App\Entity\TextBlock;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -30,5 +31,6 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToCrud('Languages', 'fas fa-language', Lang::class);
         yield MenuItem::linkToCrud('Blocks', 'fa-regular fa-file-lines', TextBlock::class);
+        yield MenuItem::linkToCrud('Experiences', 'fa-solid fa-signal', Experience::class);
     }
 }
