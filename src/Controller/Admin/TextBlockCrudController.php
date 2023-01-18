@@ -21,7 +21,7 @@ class TextBlockCrudController extends AbstractCrudController
         return [
             TextField::new('slug'),
             TextField::new('title'),
-            TextEditorField::new('content')->setTrixEditorConfig(),
+            TextEditorField::new('content'),
             AssociationField::new('lang'),
         ];
     }
