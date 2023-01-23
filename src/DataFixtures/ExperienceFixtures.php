@@ -17,6 +17,9 @@ class ExperienceFixtures extends Fixture implements DependentFixtureInterface
     {
         /** @var LangRepository */
         $langRepository = $manager->getRepository(Lang::class);
+        $langFr = $langRepository->findOneBy([
+            'slug' => 'fr'
+        ]);
 
         $exp = new Experience();
         $exp->setOrganization('LastXp Corp')
@@ -25,9 +28,7 @@ class ExperienceFixtures extends Fixture implements DependentFixtureInterface
             ->setStartDate(new DateTime('2020-08-14'))
             ->setRole('Lead Dev')
             ->setDescription('<div><p>Description goes <b>here</b></p></div>')
-            ->setLang($langRepository->findOneBy([
-                'slug' => 'fr'
-            ]));
+            ->setLang($langFr);
             
         $manager->persist($exp);
 
@@ -38,9 +39,7 @@ class ExperienceFixtures extends Fixture implements DependentFixtureInterface
             ->setStartDate(new DateTime('2018-08-14'))
             ->setRole('Consultant')
             ->setDescription('<div><p>Description also goes <b>here</b></p></div>')
-            ->setLang($langRepository->findOneBy([
-                'slug' => 'fr'
-            ]));
+            ->setLang($langFr);
             
         $manager->persist($exp);
 

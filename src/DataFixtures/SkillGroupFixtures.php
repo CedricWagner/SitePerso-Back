@@ -15,16 +15,19 @@ class SkillGroupFixtures extends Fixture implements DependentFixtureInterface
     {
         /** @var LangRepository */
         $langRepository = $manager->getRepository(Lang::class);
-
+        $langFr = $langRepository->findOneBy([
+            'slug' => 'fr'
+        ]);
+        
         $skillGroup = new SkillGroup();
         $skillGroup->setName('Languages de programmation')
-            ->setLang($langRepository->findOneBy(['slug' => 'fr']))
+            ->setLang($langFr)
             ->setWeight(1);
         $manager->persist($skillGroup);
 
         $skillGroup = new SkillGroup();
         $skillGroup->setName('Frameworks')
-            ->setLang($langRepository->findOneBy(['slug' => 'fr']))
+            ->setLang($langFr)
             ->setWeight(2);
         $manager->persist($skillGroup);
 
