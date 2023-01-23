@@ -26,6 +26,8 @@ class SkillGroupTest extends ApiTestCase
 
     public function testFilterByWrongLangReturnsNoResult(): void
     {
+        
+
         $response = static::createClient()->request('GET', '/api/skill_groups?lang.slug=en', [
             'headers' => ['accept' => "application/json"]
         ]);

@@ -8,6 +8,8 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Get;
 use App\Repository\SkillGroupRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SkillGroupRepository::class)]
@@ -37,6 +39,14 @@ class SkillGroup
 
     #[ORM\Column(nullable: true)]
     private ?int $weight = null;
+
+    #[ORM\OneToMany(mappedBy: 'skillGroup', targetEntity: Skill::class, orphanRemoval: true)]
+    private Collection $skills;
+
+    public function __construct()
+    {
+        $this->skills = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -77,5 +87,41 @@ class SkillGroup
         $this->weight = $weight;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Skill>
+     */
+    public function getSkills(): Collection
+    {
+        return $this->skills;
+    }
+
+    public function addSkill(Skill $skill): self
+    {
+        if (!$this->skills->contains($skill)) {
+            $this->skills->add($skill);
+            $skill->setSkillGroup($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSkill(Skill $skill): self
+    {
+        if ($this->skills->removeElement($skill)) {
+            // set the owning side to null (unless already changed)
+            if ($skill->getSkillGroup() === $this) {
+                $skill->setSkillGroup(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        $langSlug = $this->lang->getSlug();
+        return $this->name . " ($langSlug)";
     }
 }

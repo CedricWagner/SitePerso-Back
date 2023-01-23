@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Experience;
 use App\Entity\Lang;
+use App\Entity\Skill;
 use App\Entity\SkillGroup;
 use App\Entity\TextBlock;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -34,5 +35,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Blocks', 'fa-regular fa-file-lines', TextBlock::class);
         yield MenuItem::linkToCrud('Experiences', 'fa-solid fa-signal', Experience::class);
         yield MenuItem::linkToCrud('Skill groups', 'fa-regular fa-file-code', SkillGroup::class);
+        yield MenuItem::linkToCrud('Skills', 'fa-solid fa-code', Skill::class);
     }
 }
