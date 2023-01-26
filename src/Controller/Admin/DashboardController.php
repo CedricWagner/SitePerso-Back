@@ -7,6 +7,7 @@ use App\Entity\Lang;
 use App\Entity\Skill;
 use App\Entity\SkillGroup;
 use App\Entity\TextBlock;
+use App\Entity\Training;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -36,5 +37,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Experiences', 'fa-solid fa-signal', Experience::class);
         yield MenuItem::linkToCrud('Skill groups', 'fa-regular fa-file-code', SkillGroup::class);
         yield MenuItem::linkToCrud('Skills', 'fa-solid fa-code', Skill::class);
+        yield MenuItem::linkToCrud('Training', 'fa-solid fa-trophy', Training::class);
     }
 }
