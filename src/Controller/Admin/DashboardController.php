@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Experience;
+use App\Entity\Hobby;
 use App\Entity\Lang;
 use App\Entity\Skill;
 use App\Entity\SkillGroup;
@@ -37,6 +38,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Experiences', 'fa-solid fa-signal', Experience::class);
         yield MenuItem::linkToCrud('Skill groups', 'fa-regular fa-file-code', SkillGroup::class);
         yield MenuItem::linkToCrud('Skills', 'fa-solid fa-code', Skill::class);
-        yield MenuItem::linkToCrud('Training', 'fa-solid fa-trophy', Training::class);
+        yield MenuItem::linkToCrud('Trainings', 'fa-solid fa-trophy', Training::class);
+        yield MenuItem::linkToCrud('Hobbies', 'fa-solid fa-heart', Hobby::class);
     }
 }

@@ -6,9 +6,10 @@ use App\Entity\Lang;
 use App\Entity\Training;
 use App\Repository\LangRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class TrainingFixtures extends Fixture
+class TrainingFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
@@ -37,5 +38,12 @@ class TrainingFixtures extends Fixture
         $manager->persist($training);
 
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return [
+            LangFixtures::class,
+        ];
     }
 }
