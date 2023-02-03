@@ -26,8 +26,6 @@ class HobbyTest extends ApiTestCase
 
     public function testFilterByWrongLangReturnsNoResult(): void
     {
-        
-
         $response = static::createClient()->request('GET', '/api/hobbies?lang.slug=en', [
             'headers' => ['accept' => "application/json"]
         ]);
