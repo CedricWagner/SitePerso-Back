@@ -21,7 +21,7 @@ class ProfileInformationTest extends ApiTestCase
         ]);
 
         $this->assertResponseIsSuccessful();
-        $this->assertSame(2, sizeof($response->toArray()));
+        $this->assertSame(4, sizeof($response->toArray()));
     }
 
     public function testFilterByWrongLangReturnsNoResult(): void

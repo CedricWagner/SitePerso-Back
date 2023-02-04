@@ -40,6 +40,28 @@ class ProfileInformationFixtures extends Fixture implements DependentFixtureInte
             ->addLang($langEn);
         $manager->persist($info);
 
+        $info = new ProfileInformation();
+        $info->setSlug('github')
+            ->setValue('https://github.com/CedricWagner')
+            ->setIsPrivate(false)
+            ->addLang($langFr)
+            ->addLang($langEn);
+        $manager->persist($info);
+
+        $info = new ProfileInformation();
+        $info->setSlug('role')
+            ->setValue('Développeur Web / Fullstack')
+            ->setIsPrivate(false)
+            ->addLang($langFr);
+        $manager->persist($info);
+
+        $info = new ProfileInformation();
+        $info->setSlug('role')
+            ->setValue('Fullstack Web Developer')
+            ->setIsPrivate(false)
+            ->addLang($langEn);
+        $manager->persist($info);
+
         $manager->flush();
     }
 
