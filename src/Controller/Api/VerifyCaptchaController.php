@@ -36,6 +36,42 @@ class VerifyCaptchaController extends AbstractController
         $result = $this->verificator->verify($token);
         $session->set('is_captcha_verified', $result);
         
+        $response = new JsonResponse([
+            'result' => $session->get('is_captcha_verified'),
+        ]);
+        
+        return $response;
+    }
+
+    #[Route('/api/captcha/test/verify', name: 'app_verify_captcha_test', methods: ['GET'], condition: "'dev' === '%kernel.environment%'")]
+    public function testVerify(): JsonResponse
+    {
+        $session = $this->requestStack->getSession();
+
+        $session->set('is_captcha_verified', true);
+        
+        return new JsonResponse([
+            'result' => $session->get('is_captcha_verified'),
+        ]);
+    }
+
+    #[Route('/api/captcha/test/reset', name: 'app_reset_captcha_test', methods: ['GET'], condition: "'dev' === '%kernel.environment%'")]
+    public function testReset(): JsonResponse
+    {
+        $session = $this->requestStack->getSession();
+
+        $session->set('is_captcha_verified', false);
+        
+        return new JsonResponse([
+            'result' => $session->get('is_captcha_verified'),
+        ]);
+    }
+
+    #[Route('/api/captcha/state', name: 'app_state_captcha_test', methods: ['GET'])]
+    public function state(): JsonResponse
+    {
+        $session = $this->requestStack->getSession();
+
         return new JsonResponse([
             'result' => $session->get('is_captcha_verified'),
         ]);
