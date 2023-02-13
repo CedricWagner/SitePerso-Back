@@ -12,6 +12,18 @@ permissions:
 jobs:
   symfony-tests:
     runs-on: ubuntu-latest
+    services:
+      # https://docs.docker.com/samples/library/mysql/
+      mariadbtest:
+        image: wodby/mariadb:10.9-3.23.1
+        environment:
+          MYSQL_ROOT_PASSWORD: site_perso
+          MYSQL_DATABASE: site_perso
+          MYSQL_USER: site_perso
+          MYSQL_PASSWORD: site_perso
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
     #  To automatically get bug fixes and new Php versions for shivammathur/setup-php,
     # change this to (see https://github.com/shivammathur/setup-php#bookmark-versioning):
@@ -32,22 +44,14 @@ jobs:
           ${{ runner.os }}-php-
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-    - name: Create Database
-      run: |
-        mkdir -p data
-        touch data/database.sqlite
     - name: Install npm dependencies
       run: |
         npm install
         npm run build
     - name: Create tables & trigger fixtures
-      env:
-        DATABASE_URL: sqlite:///%kernel.project_dir%/data/database.sqlite
       run: |
         php bin/console doctrine:database:create
         php bin/console doctrine:migrations:migrate
         php bin/console doctrine:fixtures:load --append
     - name: Execute tests (Unit and Feature tests) via PHPUnit
-      env:
-        DATABASE_URL: sqlite:///%kernel.project_dir%/data/database.sqlite
       run: vendor/bin/phpunit
