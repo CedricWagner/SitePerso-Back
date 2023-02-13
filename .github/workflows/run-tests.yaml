@@ -16,7 +16,7 @@ jobs:
       # https://docs.docker.com/samples/library/mysql/
       mariadbtest:
         image: wodby/mariadb:10.9-3.23.1
-        environment:
+        env:
           MYSQL_ROOT_PASSWORD: site_perso
           MYSQL_DATABASE: site_perso
           MYSQL_USER: site_perso
