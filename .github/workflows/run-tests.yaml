@@ -18,7 +18,7 @@ jobs:
         image: wodby/mariadb:10.9-3.23.1
         env:
           MYSQL_ROOT_PASSWORD: site_perso
-          MYSQL_DATABASE: site_perso
+          MYSQL_DATABASE: site_perso_test
           MYSQL_USER: site_perso
           MYSQL_PASSWORD: site_perso
         ports:
