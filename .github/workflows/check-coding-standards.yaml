@@ -1,0 +1,44 @@
+name: Coding standards 🐘
+
+on:
+  push:
+    branches:
+    - cs
+
+jobs:
+  phpstan:
+    name: PHP Stan ✨
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # https://github.com/shivammathur/setup-php 🐘
+      - name: Setup PHP, extensions and composer with shivammathur/setup-php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2.1
+          extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql, dom, filter, gd, iconv, json, mbstring
+        env:
+          update: true
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - name: Cache composer dependencies
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-progress --no-interaction
+      # We need the dev cache because the PHPStan Symfony plugin requires it.
+      - name: Symfony cache warmup
+        run: bin/console cache:warmup --env=dev
+      - name: Install PHPUnit
+        run: vendor/bin/phpunit --version
+      - name: PHPStan Coding standards checks 
+        run: vendor/bin/phpstan analyse src tests

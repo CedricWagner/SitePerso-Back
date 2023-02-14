@@ -30,9 +30,17 @@ php bin/phpunit # from the container
 
 ### Coding standards
 
+#### CS Fixer
+
 ```bash
 # install cs fixer
 composer require --working-dir=tools/php-cs-fixer friendsofphp/php-cs-fixer 
 # apply fixes
 PHP_CS_FIXER_IGNORE_ENV=1 tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src
+```
+
+#### PHPStan
+
+```bash
+vendor/bin/phpstan analyse src tests
 ```
