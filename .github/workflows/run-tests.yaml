@@ -18,7 +18,7 @@ jobs:
         image: mysql:latest
         env:
           MYSQL_ROOT_PASSWORD: test
-          MYSQL_DATABASE: test
+          MYSQL_DATABASE: db_test
           MYSQL_USER: test
           MYSQL_PASSWORD: test
         ports:
@@ -50,7 +50,7 @@ jobs:
         npm run build
     - name: Create tables & trigger fixtures
       env:
-        DATABASE_URL: "mysql://test:test@127.0.0.1:3306/test"
+        DATABASE_URL: "mysql://test:test@127.0.0.1:3306/db"
       run: |
         php bin/console doctrine:database:create --env=test
         php bin/console doctrine:migrations:migrate --env=test
