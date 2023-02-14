@@ -1,0 +1,60 @@
+name: Unit & Functionnal Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  symfony-tests:
+    runs-on: ubuntu-latest
+    services:
+      # https://docs.docker.com/samples/library/mysql/
+      mysql:
+        image: mysql:latest
+        env:
+          MYSQL_ROOT_PASSWORD: test
+          MYSQL_DATABASE: db_test
+          MYSQL_USER: test
+          MYSQL_PASSWORD: test
+        ports:
+          - 3306:3306
+        # options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    steps:
+    - uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.2.1
+        extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql, dom, filter, gd, iconv, json, mbstring
+      env:
+        update: true
+    - uses: actions/checkout@v3
+    - name: Copy .env.test.local
+      run: php -r "file_exists('.env.test.local') || copy('.env.test', '.env.test.local');"
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v3
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-
+    - name: Install Dependencies
+      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+    - name: Install npm dependencies
+      run: |
+        npm install
+        npm run build
+    - name: Create tables & trigger fixtures
+      env:
+        DATABASE_URL: "mysql://test:test@127.0.0.1:3306/db"
+      run: |
+        php bin/console doctrine:migrations:migrate --env=test
+        php bin/console doctrine:fixtures:load --append --env=test
+    - name: Execute tests (Unit and Feature tests) via PHPUnit
+      env:
+        DATABASE_URL: "mysql://test:test@127.0.0.1:3306/db"
+      run: vendor/bin/phpunit
