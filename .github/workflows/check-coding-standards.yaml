@@ -1,4 +1,4 @@
-name: Coding standards 🐘
+name: Coding standards
 
 on:
   push:
@@ -6,8 +6,8 @@ on:
     - cs
 
 jobs:
-  phpstan:
-    name: PHP Stan ✨
+  cs:
+    name: Check coding standards 
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

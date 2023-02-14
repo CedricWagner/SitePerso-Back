@@ -1,4 +1,6 @@
 {
+    "name": "cedric-wagner/site-perso-back",
+    "description": "Personnal website (back end and back office only) based on Symfony",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",
