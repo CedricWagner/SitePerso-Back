@@ -26,7 +26,7 @@ class TrainingFixtures extends Fixture implements DependentFixtureInterface
             ->setQualification('BTS IG')
             ->setStartDate(new \DateTime('2010-09-01'));
         $manager->persist($training);
-        
+
         $training = new Training();
         $training->setDate('2016')
             ->setDescription('<p>Description du <b>diplome</b>...</p>')

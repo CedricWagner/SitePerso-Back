@@ -18,7 +18,7 @@ class SkillGroupFixtures extends Fixture implements DependentFixtureInterface
         $langFr = $langRepository->findOneBy([
             'slug' => 'fr'
         ]);
-        
+
         $skillGroup = new SkillGroup();
         $skillGroup->setName('Languages de programmation')
             ->setLang($langFr)

@@ -27,3 +27,12 @@ Repository of my personnal website (back end and back office only) based on Symf
 ```bash
 php bin/phpunit # from the container
 ```
+
+### Coding standards
+
+```bash
+# install cs fixer
+composer require --working-dir=tools/php-cs-fixer friendsofphp/php-cs-fixer 
+# apply fixes
+PHP_CS_FIXER_IGNORE_ENV=1 tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src
+```

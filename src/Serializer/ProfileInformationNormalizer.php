@@ -1,5 +1,7 @@
 <?php
+
 // api/src/Serializer/BookAttributeNormalizer.php
+
 namespace App\Serializer;
 
 use App\Entity\ProfileInformation;
@@ -14,7 +16,9 @@ class ProfileInformationNormalizer implements NormalizerInterface, NormalizerAwa
 
     private const ALREADY_CALLED = 'PROFILE_INFORMATION_NORMALIZER_ALREADY_CALLED';
 
-    public function __construct(private RequestStack $requestStack){}
+    public function __construct(private RequestStack $requestStack)
+    {
+    }
 
     public function normalize($object, $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {

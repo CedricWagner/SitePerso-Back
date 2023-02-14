@@ -27,7 +27,7 @@ class VerifyCaptchaController extends AbstractController
         $session = $this->requestStack->getSession();
 
         $content = json_decode($request->getContent());
-        
+
         if (!isset($content->clientResponse)) {
             return new JsonResponse(['result' => false], Response::HTTP_BAD_REQUEST);
         }
@@ -35,11 +35,11 @@ class VerifyCaptchaController extends AbstractController
         $token = $content->clientResponse;
         $result = $this->verificator->verify($token);
         $session->set('is_captcha_verified', $result);
-        
+
         $response = new JsonResponse([
             'result' => $session->get('is_captcha_verified'),
         ]);
-        
+
         return $response;
     }
 
@@ -49,7 +49,7 @@ class VerifyCaptchaController extends AbstractController
         $session = $this->requestStack->getSession();
 
         $session->set('is_captcha_verified', true);
-        
+
         return new JsonResponse([
             'result' => $session->get('is_captcha_verified'),
         ]);
@@ -61,7 +61,7 @@ class VerifyCaptchaController extends AbstractController
         $session = $this->requestStack->getSession();
 
         $session->set('is_captcha_verified', false);
-        
+
         return new JsonResponse([
             'result' => $session->get('is_captcha_verified'),
         ]);

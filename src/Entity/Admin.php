@@ -97,7 +97,8 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function __toString(): string {
+    public function __toString(): string
+    {
         return $this->email;
     }
 }

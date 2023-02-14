@@ -12,7 +12,6 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class ExperienceFixtures extends Fixture implements DependentFixtureInterface
 {
-
     public function load(ObjectManager $manager): void
     {
         /** @var LangRepository */
@@ -29,7 +28,7 @@ class ExperienceFixtures extends Fixture implements DependentFixtureInterface
             ->setRole('Lead Dev')
             ->setDescription('<div><p>Description goes <b>here</b></p></div>')
             ->setLang($langFr);
-            
+
         $manager->persist($exp);
 
         $exp = new Experience();
@@ -40,7 +39,7 @@ class ExperienceFixtures extends Fixture implements DependentFixtureInterface
             ->setRole('Consultant')
             ->setDescription('<div><p>Description also goes <b>here</b></p></div>')
             ->setLang($langFr);
-            
+
         $manager->persist($exp);
 
         $manager->flush();

@@ -23,7 +23,7 @@ class HobbyFixtures extends Fixture implements DependentFixtureInterface
             ->setDescription('<p>Ecoute et <i>composition</i></p>')
             ->setWeight(1);
         $manager->persist($hobby);
-        
+
         $hobby = new Hobby();
         $hobby->setName('Escrime')
             ->setLang($langFr)

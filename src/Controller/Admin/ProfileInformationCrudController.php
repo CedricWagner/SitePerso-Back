@@ -20,7 +20,7 @@ class ProfileInformationCrudController extends AbstractCrudController
         $fields[] = Field::new('slug');
         $fields[] = Field::new('value');
         $fields[] = Field::new('isPrivate');
-        $fields[] = AssociationField::new('langs')    
+        $fields[] = AssociationField::new('langs')
             ->formatValue(function ($value, ProfileInformation $item) {
                 $langNames = [];
                 foreach ($item->getLangs() as $lang) {

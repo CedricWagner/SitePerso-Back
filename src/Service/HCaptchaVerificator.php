@@ -5,7 +5,8 @@ namespace App\Service;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class HCaptchaVerificator implements CaptchaVerificatorInterface{
+class HCaptchaVerificator implements CaptchaVerificatorInterface
+{
     private $httpClient;
     private $secret;
     private $hcaptchaVerifyUrl;
@@ -17,11 +18,12 @@ class HCaptchaVerificator implements CaptchaVerificatorInterface{
         $this->hcaptchaVerifyUrl = 'https://hcaptcha.com/siteverify';
     }
 
-    public function verify(string $token): bool {
+    public function verify(string $token): bool
+    {
         $response = $this->httpClient->request('POST', $this->hcaptchaVerifyUrl, [
             'body' => [
                 'response' => $token,
-                'secret' => $this->secret 
+                'secret' => $this->secret
             ]
         ]);
 
@@ -29,5 +31,4 @@ class HCaptchaVerificator implements CaptchaVerificatorInterface{
 
         return $jsonResponse->success;
     }
-
 }

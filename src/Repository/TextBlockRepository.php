@@ -38,5 +38,4 @@ class TextBlockRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
 }
