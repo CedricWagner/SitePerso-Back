@@ -52,7 +52,6 @@ jobs:
       env:
         DATABASE_URL: "mysql://test:test@127.0.0.1:3306/db"
       run: |
-        php bin/console doctrine:database:create --env=test
         php bin/console doctrine:migrations:migrate --env=test
         php bin/console doctrine:fixtures:load --append --env=test
     - name: Execute tests (Unit and Feature tests) via PHPUnit
