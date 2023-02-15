@@ -41,4 +41,4 @@ jobs:
       - name: Install PHPUnit
         run: vendor/bin/phpunit --version
       - name: PHPStan Coding standards checks 
-        run: vendor/bin/phpstan analyse src tests
+        run: vendor/bin/phpstan analyse -c phpstan.neon

@@ -22,7 +22,7 @@ class AuthTest extends AbstractFunctionalTest
         $admin = $this->logIn();
         $this->client->request('GET', '/admin');
 
-        $this->assertSame('test@test.fr', $admin->getEmail());
+        $this->assertSame('test@test.fr', $admin?->getEmail());
         $this->assertResponseIsSuccessful();
         $this->assertRouteSame('admin');
     }

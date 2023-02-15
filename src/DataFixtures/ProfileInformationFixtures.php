@@ -15,7 +15,9 @@ class ProfileInformationFixtures extends Fixture implements DependentFixtureInte
     {
         /** @var LangRepository */
         $langRepository = $manager->getRepository(Lang::class);
+        /** @var Lang */
         $langFr = $langRepository->findOneBy(['slug' => 'fr']);
+        /** @var Lang */
         $langEn = $langRepository->findOneBy(['slug' => 'en']);
 
         $info = new ProfileInformation();

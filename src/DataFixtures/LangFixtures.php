@@ -8,7 +8,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class LangFixtures extends Fixture
 {
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $lang = new Lang();
         $lang->setName('French');

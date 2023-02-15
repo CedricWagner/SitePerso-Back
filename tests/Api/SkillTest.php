@@ -41,7 +41,7 @@ class SkillTest extends ApiTestCase
         $groupRepository = static::getContainer()->get(SkillGroupRepository::class);
         $skillGroup = $groupRepository->findOneBy(['name' => 'Languages de programmation']);
 
-        $response = static::createClient()->request('GET', '/api/skills?lang.slug=fr&skillGroup.id=' . $skillGroup->getId(), [
+        $response = static::createClient()->request('GET', '/api/skills?lang.slug=fr&skillGroup.id=' . $skillGroup?->getId(), [
             'headers' => ['accept' => "application/json"]
         ]);
 

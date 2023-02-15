@@ -42,5 +42,5 @@ PHP_CS_FIXER_IGNORE_ENV=1 tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src
 #### PHPStan
 
 ```bash
-vendor/bin/phpstan analyse src tests
+vendor/bin/phpstan analyse -c phpstan.neon
 ```

@@ -63,8 +63,8 @@ class Lang
         return $this;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->name;
+        return (string) $this->name;
     }
 }

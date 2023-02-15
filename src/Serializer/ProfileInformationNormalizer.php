@@ -1,7 +1,5 @@
 <?php
 
-// api/src/Serializer/BookAttributeNormalizer.php
-
 namespace App\Serializer;
 
 use App\Entity\ProfileInformation;
@@ -20,7 +18,11 @@ class ProfileInformationNormalizer implements NormalizerInterface, NormalizerAwa
     {
     }
 
-    public function normalize($object, $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+    /**
+     * @param array<mixed> $context
+     * @return array<int,string>|string|int|float|bool|\ArrayObject<int, string>|null
+     */
+    public function normalize(mixed $object, string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         /** @var ProfileInformation $object */
         if (!$this->userHasPermissionsForInfo($object)) {
@@ -32,7 +34,10 @@ class ProfileInformationNormalizer implements NormalizerInterface, NormalizerAwa
         return $this->normalizer->normalize($object, $format, $context);
     }
 
-    public function supportsNormalization($data, $format = null, array $context = []): bool
+    /**
+     * @param array<mixed> $context
+     */
+    public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
     {
         // Make sure we're not called twice
         if (isset($context[self::ALREADY_CALLED])) {

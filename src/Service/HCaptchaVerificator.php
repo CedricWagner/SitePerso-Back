@@ -7,13 +7,11 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class HCaptchaVerificator implements CaptchaVerificatorInterface
 {
-    private $httpClient;
-    private $secret;
-    private $hcaptchaVerifyUrl;
+    private HttpClientInterface $httpClient;
+    private string $hcaptchaVerifyUrl;
 
-    public function __construct($secret)
+    public function __construct(private string $secret)
     {
-        $this->secret = $secret;
         $this->httpClient = HttpClient::create();
         $this->hcaptchaVerifyUrl = 'https://hcaptcha.com/siteverify';
     }
@@ -27,6 +25,7 @@ class HCaptchaVerificator implements CaptchaVerificatorInterface
             ]
         ]);
 
+        /** @var \stdClass */
         $jsonResponse = json_decode($response->getContent());
 
         return $jsonResponse->success;

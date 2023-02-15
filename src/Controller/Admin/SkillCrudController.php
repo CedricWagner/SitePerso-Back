@@ -15,7 +15,7 @@ class SkillCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        $fields = parent::configureFields($pageName);
+        $fields = (array) parent::configureFields($pageName);
         $fields[] = AssociationField::new('skillGroup');
         $fields[] = AssociationField::new('lang');
 
