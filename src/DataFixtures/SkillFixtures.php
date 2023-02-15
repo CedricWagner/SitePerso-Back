@@ -29,7 +29,7 @@ class SkillFixtures extends Fixture implements DependentFixtureInterface
             ->setRating(9)
             ->setDetails('Maitrise de PHP, jusqu\'à PHP 8.x');
         $manager->persist($skill);
-        
+
         $skill = new Skill();
         $skill->setName('Javascript')
             ->setSkillGroup($groupRepository->findOneBy(['name' => 'Languages de programmation']))

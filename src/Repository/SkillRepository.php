@@ -38,5 +38,4 @@ class SkillRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
 }

@@ -16,7 +16,7 @@ class TrainingCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        $fields = parent::configureFields($pageName);
+        $fields = (array) parent::configureFields($pageName);
         $fields[] = TextEditorField::new('description');
         $fields[] = AssociationField::new('lang');
 

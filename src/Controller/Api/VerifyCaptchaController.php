@@ -12,13 +12,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class VerifyCaptchaController extends AbstractController
 {
-    private $requestStack;
-    private $verificator;
-
-    public function __construct(RequestStack $requestStack, CaptchaVerificatorInterface $verificator)
+    public function __construct(private RequestStack $requestStack, private CaptchaVerificatorInterface $verificator)
     {
-        $this->requestStack = $requestStack;
-        $this->verificator = $verificator;
     }
 
     #[Route('/api/captcha/verify', name: 'app_verify_captcha', methods: ['POST'])]
@@ -26,8 +21,9 @@ class VerifyCaptchaController extends AbstractController
     {
         $session = $this->requestStack->getSession();
 
+        /** @var \stdClass */
         $content = json_decode($request->getContent());
-        
+
         if (!isset($content->clientResponse)) {
             return new JsonResponse(['result' => false], Response::HTTP_BAD_REQUEST);
         }
@@ -35,11 +31,11 @@ class VerifyCaptchaController extends AbstractController
         $token = $content->clientResponse;
         $result = $this->verificator->verify($token);
         $session->set('is_captcha_verified', $result);
-        
+
         $response = new JsonResponse([
             'result' => $session->get('is_captcha_verified'),
         ]);
-        
+
         return $response;
     }
 
@@ -49,7 +45,7 @@ class VerifyCaptchaController extends AbstractController
         $session = $this->requestStack->getSession();
 
         $session->set('is_captcha_verified', true);
-        
+
         return new JsonResponse([
             'result' => $session->get('is_captcha_verified'),
         ]);
@@ -61,7 +57,7 @@ class VerifyCaptchaController extends AbstractController
         $session = $this->requestStack->getSession();
 
         $session->set('is_captcha_verified', false);
-        
+
         return new JsonResponse([
             'result' => $session->get('is_captcha_verified'),
         ]);

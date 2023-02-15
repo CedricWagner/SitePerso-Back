@@ -8,7 +8,6 @@ use Doctrine\Persistence\ObjectManager;
 
 class AdminFixtures extends Fixture
 {
-
     public function load(ObjectManager $manager): void
     {
         $admin = new Admin();

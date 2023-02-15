@@ -38,5 +38,4 @@ class TrainingRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
 }

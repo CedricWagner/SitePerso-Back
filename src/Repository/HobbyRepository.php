@@ -38,5 +38,4 @@ class HobbyRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
 }

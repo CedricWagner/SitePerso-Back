@@ -16,7 +16,7 @@ class HobbyCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        $fields = parent::configureFields($pageName);
+        $fields = (array) parent::configureFields($pageName);
         $fields[] = AssociationField::new('lang');
         $fields[] = TextEditorField::new('description');
 

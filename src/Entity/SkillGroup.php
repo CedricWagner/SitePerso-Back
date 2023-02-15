@@ -121,7 +121,7 @@ class SkillGroup
 
     public function __toString()
     {
-        $langSlug = $this->lang->getSlug();
+        $langSlug = $this->lang?->getSlug();
         return $this->name . " ($langSlug)";
     }
 }

@@ -28,14 +28,18 @@ abstract class AbstractFunctionalTest extends WebTestCase
         parent::tearDown();
     }
 
-    public function logIn($email = 'test@test.fr'): Admin {
+    public function logIn(string $email = 'test@test.fr'): Admin|null {
+        /** @var AdminRepository */
         $adminRepository = static::getContainer()->get(AdminRepository::class);
 
         // retrieve the test user
         $testAdmin = $adminRepository->findOneByEmail($email);
-        $this->client->loginUser($testAdmin);
+        if ($testAdmin) {
+            $this->client->loginUser($testAdmin);
+            return $testAdmin;
+        } 
 
-        return $testAdmin;
+        return null;
     } 
 
 }

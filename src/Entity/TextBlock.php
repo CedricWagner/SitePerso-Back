@@ -22,8 +22,8 @@ use Doctrine\ORM\Mapping as ORM;
 ]
 #[ApiFilter(SearchFilter::class, properties: ['id' => 'exact', 'slug' => 'exact', 'lang.slug' => 'exact'])]
 #[ORM\Entity(repositoryClass: TextBlockRepository::class)]
-class TextBlock {
-
+class TextBlock
+{
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
