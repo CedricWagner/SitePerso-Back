@@ -2,13 +2,14 @@ name: Coding standards
 
 on:
   push:
-    branches:
-    - main
+    branches: [ deploy ]
+  pull_request:
+    branches: [ deploy ]
 
 jobs:
   cs:
     name: Check coding standards 
-    runs-on: ubuntu-latest
+    runs-on: alpine-3.17.1
     steps:
       - name: Checkout
         uses: actions/checkout@v3
