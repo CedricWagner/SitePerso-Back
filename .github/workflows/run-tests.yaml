@@ -2,16 +2,16 @@ name: Unit & Functional Tests
 
 on:
   push:
-    branches: [ deploy ]
+    branches: [ main ]
   pull_request:
-    branches: [ deploy ]
+    branches: [ main ]
 
 permissions:
   contents: read
 
 jobs:
   symfony-tests:
-    runs-on: alpine-3.17.1
+    runs-on: ubuntu-latest
     services:
       # https://docs.docker.com/samples/library/mysql/
       mysql:
