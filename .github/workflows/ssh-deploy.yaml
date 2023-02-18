@@ -44,6 +44,7 @@ jobs:
           envkey_CORS_ALLOW_ORIGIN: ${{ secrets.CORS_ALLOW_ORIGIN }}
           envkey_HCAPTCHA_SECRET: ${{ secrets.HCAPTCHA_SECRET }}
           file_name: .env.local
+        run: cat ./env.local
       # Copying files and artifacts via SSH
       - name: Copying files to server
         uses: appleboy/scp-action@master
