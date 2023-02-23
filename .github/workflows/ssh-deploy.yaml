@@ -56,6 +56,15 @@ jobs:
           # rm: true
           source: "./"
           target: ${{ secrets.REMOTE_TARGET }}
+      # Check files on production
+      - name: Check files on production
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          passphrase: ''
+          script: ls -al
       # Run commands on production
       - name: Executing remote ssh commands
         uses: appleboy/ssh-action@master
