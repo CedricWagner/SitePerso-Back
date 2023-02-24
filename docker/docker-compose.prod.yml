@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  mariadb:
+  siteperso-mariadb:
     image: wodby/mariadb:$MARIADB_TAG
     container_name: "${PROJECT_NAME}_mariadb"
     stop_grace_period: 30s
@@ -11,7 +11,7 @@ services:
       MYSQL_USER: $DB_USER
       MYSQL_PASSWORD: $DB_PASSWORD
 
-  php:
+  siteperso-php:
     image: wodby/php:$PHP_TAG
     container_name: "${PROJECT_NAME}_php"
     environment:
@@ -28,7 +28,7 @@ services:
     volumes:
     - ../:/var/www/html:cached
 
-  nginx:
+  siteperso-nginx:
     image: wodby/nginx:$NGINX_TAG
     container_name: "${PROJECT_NAME}_nginx"
     depends_on:
