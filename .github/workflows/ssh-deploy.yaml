@@ -97,6 +97,7 @@ jobs:
           script: |
             cd ${{ secrets.REMOTE_TARGET }}
             cd docker
+            make stop-prod
             make up-prod
             sleep 3
-            make exec "php bin/console doctrine:migrations:migrate --env=prod" 
+            make exec "php bin/console doctrine:migrations:migrate --env=prod"

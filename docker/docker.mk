@@ -36,6 +36,11 @@ stop:
 	@echo "Stopping containers for $(PROJECT_NAME)..."
 	@docker-compose stop
 
+## stop-prod	:	Stop prod containers.
+stop-prod:
+	@echo "Stopping containers for $(PROJECT_NAME)..."
+	@docker-compose -f docker-compose.prod.yml stop
+
 ## prune	:	Remove containers and their volumes.
 ##		You can optionally pass an argument with the service name to prune single container
 ##		prune mariadb	: Prune `mariadb` container and remove its volumes.
