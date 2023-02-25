@@ -3,6 +3,8 @@ name: SSH Deploy
 on:
   push:
     branches: [ main ]
+  pull-request:
+    branches: [ main ]
 
 jobs:
   build:

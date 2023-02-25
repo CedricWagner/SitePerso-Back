@@ -1,0 +1,15 @@
+name: Basic tests
+
+# run on every pushes and every pull requests, except for main branch
+on:
+  push:
+    branches-ignore: [ main ]
+  pull-request:
+    branches-ignore: [ main ]
+
+jobs:
+  coding-standards:
+    uses: ./.github/workflows/_partials/coding-standards.yml
+  functional-tests:
+    needs: coding-standards
+    uses: ./.github/workflows/_partials/functional-tests.yml
