@@ -1,0 +1,54 @@
+version: "3"
+
+services:
+  siteperso-mariadb:
+    image: wodby/mariadb:$MARIADB_TAG
+    container_name: "${PROJECT_NAME}_mariadb"
+    stop_grace_period: 30s
+    environment:
+      MYSQL_ROOT_PASSWORD: $DB_ROOT_PASSWORD
+      MYSQL_DATABASE: $DB_NAME
+      MYSQL_USER: $DB_USER
+      MYSQL_PASSWORD: $DB_PASSWORD
+
+  siteperso-php:
+    image: wodby/php:$PHP_TAG
+    container_name: "${PROJECT_NAME}_php"
+    environment:
+      SSMTP_MAILHUB: opensmtpd:25
+      PHP_SENDMAIL_PATH: '"/usr/bin/dos2unix -u | /usr/sbin/ssmtp -t -f"'
+      DB_HOST: $DB_HOST
+      DB_USER: $DB_USER
+      DB_PASSWORD: $DB_PASSWORD
+      DB_NAME: $DB_NAME
+      PHP_FPM_USER: wodby
+      PHP_FPM_GROUP: wodby
+      PHP_SHORT_OPEN_TAG: 0
+      PHP_POST_MAX_SIZE: 64M
+    volumes:
+    - ../:/var/www/html:cached
+
+  siteperso-nginx:
+    image: wodby/nginx:$NGINX_TAG
+    container_name: "${PROJECT_NAME}_nginx"
+    depends_on:
+    - siteperso-php
+    environment:
+      VIRTUAL_HOST: back.cedric-wagner.fr
+      NGINX_STATIC_OPEN_FILE_CACHE: "off"
+      NGINX_ERROR_LOG_LEVEL: debug
+      NGINX_BACKEND_HOST: siteperso-php
+      NGINX_VHOST_PRESET: php
+      NGINX_SERVER_ROOT: /var/www/html/public
+      NGINX_FASTCGI_BUFFER_SIZE: 64k
+      NGINX_CLIENT_BODY_BUFFER_SIZE: 64k
+    volumes:
+    - ../:/var/www/html:cached
+
+volumes:
+  dbdata:
+
+networks:
+  default:
+    external:
+      name: nginx-proxy

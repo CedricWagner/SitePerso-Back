@@ -14,6 +14,12 @@ up:
 	docker-compose pull
 	docker-compose up -d --remove-orphans
 
+## up-prod	:	Start up containers.
+up-prod:
+	@echo "Starting up containers for for $(PROJECT_NAME)..."
+	docker-compose -f docker-compose.prod.yml pull
+	docker-compose -f docker-compose.prod.yml up -d --remove-orphans
+
 mutagen:
 	mutagen-compose up
 
@@ -29,6 +35,11 @@ start:
 stop:
 	@echo "Stopping containers for $(PROJECT_NAME)..."
 	@docker-compose stop
+
+## stop-prod	:	Stop prod containers.
+stop-prod:
+	@echo "Stopping containers for $(PROJECT_NAME)..."
+	@docker-compose -f docker-compose.prod.yml stop
 
 ## prune	:	Remove containers and their volumes.
 ##		You can optionally pass an argument with the service name to prune single container
@@ -46,6 +57,11 @@ ps:
 ##		You can optionally pass an argument with a service name to open a shell on the specified container
 shell:
 	docker exec -ti -e COLUMNS=$(shell tput cols) -e LINES=$(shell tput lines) $(shell docker ps --filter name='$(PROJECT_NAME)_$(or $(filter-out $@,$(MAKECMDGOALS)), 'php')' --format "{{ .ID }}") sh
+
+## shell	:	Access `php` container via shell.
+##		You can pass an argument with the command to execute
+exec:
+	docker exec -e COLUMNS=$(shell tput cols) -e LINES=$(shell tput lines) $(shell docker ps --filter name='$(PROJECT_NAME)_php' --format "{{ .ID }}") $(filter-out $@,$(MAKECMDGOALS))
 
 ## logs	:	View containers logs.
 ##		You can optinally pass an argument with the service name to limit logs
