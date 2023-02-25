@@ -4,7 +4,7 @@ name: Basic tests
 on:
   push:
     branches-ignore: [ main ]
-  pull-request:
+  pull_request:
     branches-ignore: [ main ]
 
 jobs:
