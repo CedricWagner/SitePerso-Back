@@ -93,5 +93,5 @@ jobs:
             cd ${{ secrets.REMOTE_TARGET }}
             cd docker
             make up-prod
-            sleep 10
+            sleep 3
             make exec "php bin/console doctrine:migrations:migrate --env=prod" 
