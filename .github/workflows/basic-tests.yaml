@@ -9,7 +9,7 @@ on:
 
 jobs:
   coding-standards:
-    uses: ./.github/workflows/coding-standards.yml
+    uses: ./.github/workflows/coding-standards.yaml
   functional-tests:
     needs: coding-standards
-    uses: ./.github/workflows/functional-tests.yml
+    uses: ./.github/workflows/functional-tests.yaml
