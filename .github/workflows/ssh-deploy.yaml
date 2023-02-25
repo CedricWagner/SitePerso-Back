@@ -2,7 +2,7 @@ name: SSH Deploy
 
 on:
   push:
-    branches: [ deploy ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -48,7 +48,7 @@ jobs:
       # Install NPM dependencies
       - name: Install NPM dependencies
         run: npm install
-      - name: Build files
+      - name: Build npm files
         run: npm run build
       # Copying files and artifacts via SSH
       - name: Copying files to server
