@@ -37,9 +37,11 @@ services:
       VIRTUAL_HOST: back.cedric-wagner.fr
       NGINX_STATIC_OPEN_FILE_CACHE: "off"
       NGINX_ERROR_LOG_LEVEL: debug
-      NGINX_BACKEND_HOST: php
+      NGINX_BACKEND_HOST: siteperso-php
       NGINX_VHOST_PRESET: php
       NGINX_SERVER_ROOT: /var/www/html/public
+      NGINX_FASTCGI_BUFFER_SIZE: 64k
+      NGINX_CLIENT_BODY_BUFFER_SIZE: 64k
     volumes:
     - ../:/var/www/html:cached
 
