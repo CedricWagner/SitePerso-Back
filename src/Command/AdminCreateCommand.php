@@ -16,8 +16,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class AdminCreateCommand extends Command
 {
-
-    public function __construct(private AdminFactory $adminFactory) 
+    public function __construct(private AdminFactory $adminFactory)
     {
         parent::__construct(self::getDefaultName());
     }
@@ -39,7 +38,7 @@ class AdminCreateCommand extends Command
                 if ('' === trim($value)) {
                     throw new \Exception('The email cannot be empty');
                 }
-        
+
                 return $value;
             });
         }
@@ -48,7 +47,7 @@ class AdminCreateCommand extends Command
             if ('' === trim($value)) {
                 throw new \Exception('The password cannot be empty');
             }
-    
+
             return $value;
         });
 

@@ -4,6 +4,9 @@ namespace App\Tests\Command;
 
 use App\Entity\Admin;
 use App\Repository\AdminRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\Persistence\ObjectManager;
+use Symfony\Bridge\Doctrine\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -12,11 +15,11 @@ class AdminCreateCommandTest extends KernelTestCase
 {
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var ObjectManager|null
      */
     private $entityManager;
     /**
-     * @var Symfony\Bundle\FrameworkBundle\Console\Application
+     * @var Application
      */
     private $application;
 
@@ -24,13 +27,13 @@ class AdminCreateCommandTest extends KernelTestCase
     {
         $kernel = self::bootKernel();
 
-        $this->entityManager = $kernel->getContainer()
-            ->get('doctrine')
-            ->getManager();
+        /** @var ManagerRegistry */
+        $doctrineRegistry = $kernel->getContainer()->get('doctrine');
+        $this->entityManager = $doctrineRegistry->getManager();
         $this->application = new Application($kernel);
     }
 
-    public function testExecute() 
+    public function testExecute(): void 
     {
 
         $command = $this->application->find('app:admin:create');
@@ -41,7 +44,7 @@ class AdminCreateCommandTest extends KernelTestCase
         ]);
 
         /** @var AdminRepository */
-        $adminRepository = $this->entityManager->getRepository(Admin::class);
+        $adminRepository = $this->entityManager?->getRepository(Admin::class);
         $newAdmin = $adminRepository->findOneByEmail('new@dmin.com');
 
         $commandTester->assertCommandIsSuccessful();
@@ -57,7 +60,6 @@ class AdminCreateCommandTest extends KernelTestCase
     {
         parent::tearDown();
 
-        $this->entityManager->close();
         $this->entityManager = null;
     }
 
