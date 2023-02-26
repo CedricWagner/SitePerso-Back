@@ -3,9 +3,16 @@ name: SSH Deploy
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
+  coding-standards:
+    uses: ./.github/workflows/coding-standards.yaml
+  functional-tests:
+    uses: ./.github/workflows/functional-tests.yaml
   build:
+    needs: [functional-tests, coding-standards]
     runs-on: ubuntu-latest
     environment: production
     steps:
