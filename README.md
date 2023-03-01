@@ -4,9 +4,9 @@ Repository of my personnal website (back end and back office only) based on Symf
 
 ---
 
-[![Unit & Functional Tests](https://github.com/CedricWagner/SitePerso-Back/actions/workflows/run-tests.yaml/badge.svg)](https://github.com/CedricWagner/SitePerso-Back/actions/workflows/run-tests.yaml)
+[![Basic tests](https://github.com/CedricWagner/SitePerso-Back/actions/workflows/basic-tests.yaml/badge.svg)](https://github.com/CedricWagner/SitePerso-Back/actions/workflows/basic-tests.yaml)
 
-[![Coding standards](https://github.com/CedricWagner/SitePerso-Back/actions/workflows/check-coding-standards.yaml/badge.svg)](https://github.com/CedricWagner/SitePerso-Back/actions/workflows/check-coding-standards.yaml)
+[![SSH Deploy](https://github.com/CedricWagner/SitePerso-Back/actions/workflows/ssh-deploy.yaml/badge.svg)](https://github.com/CedricWagner/SitePerso-Back/actions/workflows/ssh-deploy.yaml)
 
 
 ## Requirements
