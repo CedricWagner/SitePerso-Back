@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
         new Get(),
         new GetCollection()
     ],
-    order: ['slug' => 'ASC'],
+    order: ['weight' => 'ASC', 'slug' => 'ASC'],
     paginationEnabled: false
 )]
 #[ApiFilter(SearchFilter::class, properties: ['langs.slug' => 'exact', 'slug' => 'exact'])]
@@ -41,6 +41,9 @@ class ProfileInformation
 
     #[ORM\Column(nullable: true)]
     private ?bool $isPrivate = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $weight = null;
 
     public function __construct()
     {
@@ -108,6 +111,18 @@ class ProfileInformation
     public function setIsPrivate(?bool $isPrivate): self
     {
         $this->isPrivate = $isPrivate;
+
+        return $this;
+    }
+
+    public function getWeight(): ?int
+    {
+        return $this->weight;
+    }
+
+    public function setWeight(?int $weight): self
+    {
+        $this->weight = $weight;
 
         return $this;
     }
